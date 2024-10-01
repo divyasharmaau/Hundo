@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
 
 <head>
-    <title>App Name: A coding Project by DS</title>
+    <title>Hundo: A coding Project by DS</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,8 +12,11 @@
         integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
     <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
+ <!-- <script src="https://kit.fontawesome.com/8739020279.js" crossorigin="anonymous"></script> -->
 
-    <script src="https://kit.fontawesome.com/8739020279.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     
 
     <link href="../css/site.css" rel="stylesheet">
@@ -29,7 +32,7 @@
     <!--Nav Section-->
     <nav class="navbar navbar-expand-md  navbar-dark fixed-top ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="../img/apple-touch-icon.png" class="d-inline-block align-text-top" alt="Logo" width="30" height="28"> App Name</a>
+            <a class="navbar-brand logoFont" href="#"><img src="../img/apple-touch-icon.png" class="d-inline-block align-text-top" alt="Logo" width="30" height="25">Hundo</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -58,14 +61,73 @@
      <!--Main Section-->
      <main class="flex-shrink-0">
         <div class="container px-5 py-5 mt-5">
-            <h2 class="border-1 border-bottom border-dark">The Code for APP NAME</h2>
+            <h2 class="border-1 border-bottom border-dark">The Code for Hundo</h2>
             <div class="row row-cols-1 row-cols-lg-2">
                 <div clas="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        //Call Hello World
-                        function HelloWorld(){
-                            alert("Hello World!!");
-                        }
+                      
+//get the values from the page
+//start or controller function
+function getValues(){
+    //get values from the page
+    let startValue = document.getElementById("startValue").value;
+    let endValue = document.getElementById("endValue").value;
+    // let numbers =[];
+
+    //parse into Integers
+    startValue = parseInt(startValue);
+    endValue = parseInt(endValue);
+
+    if(Number.isInteger(startValue) && Number.isInteger(endValue)){
+        //call generate numbers
+        let numbers = genrateNumbers(startValue, endValue);
+         //call display numbers
+        displayNumbers(numbers);
+    }
+    else{
+        alert("You must enter an Integer");
+    }
+   
+}
+
+//generate numbers from startValue to endValue
+//logic function(s)
+function genrateNumbers(sValue, eValue){
+    let numbers = [];
+    //all numbers from start to end
+    for(let i=sValue; i<= eValue; i++){
+        numbers.push(i);
+    }
+    return numbers;
+}
+
+//display the numbers and the even numbers bold
+//display or view functions
+
+function displayNumbers(numbers){
+
+    let templateRows ="";
+  
+    for(let i=0; i < numbers.length; i++){
+
+        let className = "even";
+       
+        let number = numbers[i];
+        if(number % 2 == 0){
+            className = "even";
+        }
+        else{
+            className ="odd";
+        }
+
+        //This does not render correctly with prism. See the source code
+        templateRows += `<tr><td class="${className}">${number}</td></tr>`
+        templateRows += `&lt;tr>&lt;td class="${className}" >${number}&lt;/td>&lt;/tr>
+    }
+    
+    document.getElementById("results").innerHTML = templateRows;
+}
+
                         </code>
                     </pre>
                 </div>
